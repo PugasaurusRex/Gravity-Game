@@ -16,12 +16,14 @@ public class SettingsController : MonoBehaviour
 
     // Controls Textbox
     public TMP_Text jump;
+    public TMP_Text cancel;
 
     // Start is called before the first frame update
     void Start()
     {
         // Add Keys to dictionary
         keys.Add("Jump", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space")));
+        keys.Add("Cancel", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Cancel", "Escape")));
 
         SetText();
     }
@@ -80,6 +82,7 @@ public class SettingsController : MonoBehaviour
 
     public void SetText()
     {
-        //jump.text = PlayerPrefs.GetString("Jump", "Space");
+        jump.text = PlayerPrefs.GetString("Jump", "Space");
+        cancel.text = PlayerPrefs.GetString("Cancel", "Escape");
     }
 }

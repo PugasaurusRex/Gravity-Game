@@ -7,7 +7,6 @@ public class Menu : MonoBehaviour
     // Menu Panels
     public GameObject p1;
     public GameObject p2;
-    public GameObject p3;
 
     // Control Menu
     public GameObject ControlMenu;
@@ -83,17 +82,10 @@ public class Menu : MonoBehaviour
             case 1:
                 p1.SetActive(true);
                 p2.SetActive(false);
-                p3.SetActive(false);
                 break;
             case 2:
                 p1.SetActive(false);
                 p2.SetActive(true);
-                p3.SetActive(false);
-                break;
-            case 3:
-                p1.SetActive(false);
-                p2.SetActive(false);
-                p3.SetActive(true);
                 break;
             default:
                 break;
