@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class Menu : MonoBehaviour
     SettingsController Controls;
 
     int level;
+
+    // Panels
+    public GameObject UI;
+    public GameObject GameOverScreen;
+    public GameObject PauseMenu;
+    public GameObject SettingsMenu;
+    public GameObject VictoryScreen;
+    public GameObject PreGame;
 
     // Audio
     AudioSource Speaker;
@@ -32,7 +41,7 @@ public class Menu : MonoBehaviour
 
         Sources = FindObjectsOfType<AudioSource>();
 
-        //volumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("volume", 1);
+        volumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("volume", 1);
 
         foreach (AudioSource i in Sources)
         {
@@ -57,7 +66,7 @@ public class Menu : MonoBehaviour
                     Speaker.clip = ApplySound;
                     Speaker.PlayOneShot(Speaker.clip);
 
-                    //PauseMenu.SetActive(true);
+                    PauseMenu.SetActive(true);
                     Time.timeScale = 0;
                 }
                 else
@@ -66,9 +75,11 @@ public class Menu : MonoBehaviour
                     Speaker.PlayOneShot(Speaker.clip);
 
                     Time.timeScale = 1;
-                    //PauseMenu.SetActive(false);
+                    PauseMenu.SetActive(false);
                 }
             }
+
+
         }
     }
 
@@ -125,30 +136,30 @@ public class Menu : MonoBehaviour
 
     public void ResumeGame()
     {
-        Speaker.clip = ForwardSound;
+        Speaker.clip = CancelSound;
         Speaker.PlayOneShot(Speaker.clip);
 
-        //PauseMenu.SetActive(false);
+        PauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void Gameover()
     {
         Time.timeScale = 0;
-        //UI.SetActive(false);
-        //GameOverScreen.SetActive(true);
+        UI.SetActive(false);
+        GameOverScreen.SetActive(true);
     }
 
     public void Victory()
     {
         Time.timeScale = 0;
-        //UI.SetActive(false);
-        //VictoryScreen.SetActive(true);
+        UI.SetActive(false);
+        VictoryScreen.SetActive(true);
     }
 
     public void VolumeChanged()
     {
-        //PlayerPrefs.SetFloat("volume", volumeSlider.GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("volume", volumeSlider.GetComponent<Slider>().value);
         PlayerPrefs.Save();
 
         Sources = FindObjectsOfType<AudioSource>();

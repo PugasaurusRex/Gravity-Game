@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     public GameObject ControlMenu;
     SettingsController Controls;
 
-    // Gamestate
-    public int Score = 0;
-
     // Audio
     AudioSource Speaker;
     public AudioClip JumpSound;

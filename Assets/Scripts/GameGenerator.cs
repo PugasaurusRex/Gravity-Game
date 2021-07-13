@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -20,6 +21,7 @@ public class GameGenerator : MonoBehaviour
 
     // Game variables
     public float speed = .1f;
+    public TMP_Text score;
 
     // Start is called before the first frame update
     void Start()
@@ -30,29 +32,23 @@ public class GameGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grid.transform.position += new Vector3(-speed, 0);
-        if(grid.transform.position.x <= cell)
+        if(Time.timeScale != 0)
         {
-            for(int i = -5; i <= 4; i++)
-            {
-                tilemap.SetTile(new Vector3Int(end, i, 0), null);
-            }
-            tilemap.SetTile(new Vector3Int(begin, -5, 0), ground);
-            tilemap.SetTile(new Vector3Int(begin, 4, 0), ceiling);
-            cell -= 1;
-            begin += 1;
-            end += 1;
-        }
-        
-    }
+            score.text = "" + Mathf.Abs((int)grid.transform.position.x);
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision);
-        if(collision.gameObject.tag == "Bound")
-        {
-            
-            
+            grid.transform.position += new Vector3(-speed, 0);
+            if (grid.transform.position.x <= cell)
+            {
+                for (int i = -5; i <= 4; i++)
+                {
+                    tilemap.SetTile(new Vector3Int(end, i, 0), null);
+                }
+                tilemap.SetTile(new Vector3Int(begin, -5, 0), ground);
+                tilemap.SetTile(new Vector3Int(begin, 4, 0), ceiling);
+                cell -= 1;
+                begin += 1;
+                end += 1;
+            }
         }
     }
 }
