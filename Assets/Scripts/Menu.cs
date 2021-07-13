@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class Menu : MonoBehaviour
     SettingsController Controls;
 
     int level;
+    public bool GameStart = false;
+    public TMP_Text StartKeyText;
 
     // Panels
     public GameObject UI;
@@ -50,6 +53,12 @@ public class Menu : MonoBehaviour
 
         Controls = ControlMenu.GetComponent<SettingsController>();
         level = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+        if (level != 0)
+        {
+            StartKeyText.text = PlayerPrefs.GetString("Jump", "Space");
+        }
+
         Time.timeScale = 1;
     }
 
@@ -79,7 +88,12 @@ public class Menu : MonoBehaviour
                 }
             }
 
-
+            if (GameStart == false && Input.GetKeyDown(Controls.keys["Jump"]))
+            {
+                GameStart = true;
+                PreGame.SetActive(false);
+                UI.SetActive(true);
+            }
         }
     }
 

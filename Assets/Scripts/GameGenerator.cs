@@ -6,6 +6,9 @@ using UnityEngine.Tilemaps;
 
 public class GameGenerator : MonoBehaviour
 {
+    public GameObject Menu;
+    Menu MenuScript;
+
     // Grid and map
     public GameObject grid;
     public Tilemap tilemap;
@@ -26,13 +29,13 @@ public class GameGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        MenuScript = Menu.GetComponent<Menu>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.timeScale != 0)
+        if(Time.timeScale != 0 && MenuScript.GameStart)
         {
             score.text = "" + Mathf.Abs((int)grid.transform.position.x);
 

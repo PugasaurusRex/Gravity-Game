@@ -1750,6 +1750,13 @@ MonoBehaviour:
   p1: {fileID: 1475030942}
   p2: {fileID: 2081933217}
   ControlMenu: {fileID: 1376202155}
+  GameStart: 0
+  UI: {fileID: 0}
+  GameOverScreen: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  SettingsMenu: {fileID: 0}
+  VictoryScreen: {fileID: 0}
+  PreGame: {fileID: 0}
   Sources: []
   volumeSlider: {fileID: 1361086940}
   ApplySound: {fileID: 8300000, guid: 6fb621a1343bd44419716b0cb545c8a3, type: 3}
@@ -2572,7 +2579,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f61ff98176729aa4f85677a83917ab64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 099f34fa1de16e24289107bff4527bbc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
