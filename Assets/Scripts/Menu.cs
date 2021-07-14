@@ -91,6 +91,7 @@ public class Menu : MonoBehaviour
             if (GameStart == false && Input.GetKeyDown(Controls.keys["Jump"]))
             {
                 GameStart = true;
+                GameObject.Find("Character").GetComponent<PlayerController>().Anim.SetBool("Run", true);
                 PreGame.SetActive(false);
                 UI.SetActive(true);
             }
