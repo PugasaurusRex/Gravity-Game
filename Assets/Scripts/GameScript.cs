@@ -13,13 +13,19 @@ public class GameScript : MonoBehaviour
 
     // Game variables
     public TMP_Text score;
+    public int scoreval = 0;
 
     // Map Objects
     public GameObject floor;
     public GameObject roof;
 
     // Traps
+    public GameObject spike;
 
+    public float dmin = 3; // min seconds between traps
+    public float dmax = 5; // max seconds between traps
+
+    bool canTrap = true;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +37,18 @@ public class GameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(PC.transform.position.x - 12,0);
-        if (Time.timeScale != 0 && MenuScript.GameStart)
+        transform.position = new Vector2(PC.transform.position.x - 12, 0);
+        if (Time.timeScale != 0)
         {
-            score.text = "" + (int)PC.transform.position.x;
+            scoreval = (int)PC.transform.position.x;
+            score.text = "" + scoreval;
+
+            if (canTrap)
+            {
+                canTrap = false;
+                float temp = Random.Range(dmin, dmax);
+                StartCoroutine(SpawnTrap(temp));
+            }
         }
     }
 
@@ -42,9 +56,28 @@ public class GameScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Instantiate(floor, new Vector2((int)PC.transform.position.x + 11, -4.5f), Quaternion.identity);
-            Instantiate(roof, new Vector2((int)PC.transform.position.x + 11, 4.5f), Quaternion.Euler(new Vector3(0, 0, 180)));
+            Instantiate(floor, new Vector2((int)PC.transform.position.x + 12, -4.5f), Quaternion.identity);
+            Instantiate(roof, new Vector2((int)PC.transform.position.x + 12, 4.5f), Quaternion.Euler(new Vector3(0, 0, 180)));
         }
         Destroy(collision.gameObject);
+    }
+
+    IEnumerator SpawnTrap(float waitTime)
+    {
+        int temp = Random.Range(0, 1); // Choose a trap
+        int pos = Random.Range(0, 2);
+
+        switch (temp)
+        {
+            case 0: // spike
+                if(pos == 1)
+                    Instantiate(spike, new Vector2((int)PC.transform.position.x + 11, 2.46f), Quaternion.identity);
+                else
+                    Instantiate(spike, new Vector2((int)PC.transform.position.x + 11, -2.46f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                break;
+        }
+
+        yield return new WaitForSeconds(waitTime);
+        canTrap = true;
     }
 }

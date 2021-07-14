@@ -14,6 +14,11 @@ public class Menu : MonoBehaviour
     public GameObject ControlMenu;
     SettingsController Controls;
 
+    // GameOver Score Display
+    public GameScript Game;
+    public TMP_Text GameScore;
+    public TMP_Text HighScore;
+
     int level;
     public bool GameStart = false;
     public TMP_Text StartKeyText;
@@ -23,7 +28,6 @@ public class Menu : MonoBehaviour
     public GameObject GameOverScreen;
     public GameObject PauseMenu;
     public GameObject SettingsMenu;
-    public GameObject VictoryScreen;
     public GameObject PreGame;
 
     // Audio
@@ -160,16 +164,21 @@ public class Menu : MonoBehaviour
 
     public void Gameover()
     {
+        int high = PlayerPrefs.GetInt("HighScore", 0);
+
+        if (Game.scoreval > high)
+        {
+            high = Game.scoreval;
+            PlayerPrefs.SetInt("HighScore", Game.scoreval);
+            PlayerPrefs.Save();
+        }
+
+        GameScore.text = "" + Game.scoreval;
+        HighScore.text = "" + high;
+
         Time.timeScale = 0;
         UI.SetActive(false);
         GameOverScreen.SetActive(true);
-    }
-
-    public void Victory()
-    {
-        Time.timeScale = 0;
-        UI.SetActive(false);
-        VictoryScreen.SetActive(true);
     }
 
     public void VolumeChanged()

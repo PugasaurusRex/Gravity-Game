@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     // Audio
     AudioSource Speaker;
     public AudioClip JumpSound;
+    public AudioClip DieSound;
 
     public float speed = 0.1f;
 
@@ -40,11 +41,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Camera.main.transform.position = new Vector3(transform.position.x, 0, -10);
+        Background.transform.position = new Vector2(transform.position.x, 0);
+
         if (Time.timeScale != 0 && MenuScript.GameStart)
         {
             Rig.velocity = new Vector2(speed, 0) + new Vector2(0, Rig.velocity.y);
-            Camera.main.transform.position = new Vector3(transform.position.x, 0, -10);
-            Background.transform.position = new Vector2(transform.position.x, 0);
 
             if (Input.GetKeyDown(Controls.keys["Jump"]))
             {
@@ -78,5 +80,23 @@ public class PlayerController : MonoBehaviour
                 Anim.SetBool("Jump", false);
             } 
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Trap")
+        {
+            Anim.SetBool("Hurt", true);
+            MenuScript.GameStart = false;
+            StartCoroutine(GameOver(1f));
+        }
+    }
+
+    IEnumerator GameOver(float waitTime)
+    {
+        Speaker.clip = DieSound;
+        Speaker.PlayOneShot(Speaker.clip);
+        yield return new WaitForSeconds(waitTime);
+        MenuScript.Gameover();
     }
 }
