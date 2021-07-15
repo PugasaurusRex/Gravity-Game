@@ -20,7 +20,7 @@ public class GameScript : MonoBehaviour
     public GameObject roof;
 
     // Traps
-    public GameObject spike;
+    public GameObject[] traps;
 
     public float dmin = 3; // min seconds between traps
     public float dmax = 5; // max seconds between traps
@@ -64,16 +64,24 @@ public class GameScript : MonoBehaviour
 
     IEnumerator SpawnTrap(float waitTime)
     {
-        int temp = Random.Range(0, 1); // Choose a trap
+        int temp = Random.Range(0, 2); // Choose a trap
         int pos = Random.Range(0, 2);
 
         switch (temp)
         {
             case 0: // spike
                 if(pos == 1)
-                    Instantiate(spike, new Vector2((int)PC.transform.position.x + 11, 2.46f), Quaternion.identity);
+                    Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11, 2.46f), Quaternion.identity);
                 else
-                    Instantiate(spike, new Vector2((int)PC.transform.position.x + 11, -2.46f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11, -2.46f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                break;
+            case 1: // laser
+                if (pos == 1)
+                    Instantiate(traps[1], new Vector2((int)PC.transform.position.x + 11, 1.29f), Quaternion.identity);
+                else
+                    Instantiate(traps[1], new Vector2((int)PC.transform.position.x + 11, -1.29f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                break;
+            default:
                 break;
         }
 
