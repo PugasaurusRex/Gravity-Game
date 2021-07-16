@@ -21,10 +21,10 @@ public class GameScript : MonoBehaviour
 
     // Traps
     public GameObject[] traps;
-    bool canTrap = true;
+    bool canTrap = false;
 
     // Difficulty
-    int trapRange = 4;
+    int trapRange = 1;
     float dmin = 3; // min seconds between traps
     float dmax = 5; // max seconds between traps
     int dif = 0;
@@ -55,13 +55,49 @@ public class GameScript : MonoBehaviour
             if (dif == 0)
             {
                 dif = 1;
-                trapRange = 4;
-                dmin = 1;
-                dmax = 2;
+                trapRange = 1;
+                dmin = 3;
+                dmax = 6;
+                canTrap = true;
             }
-            else if (dif == 1 && scoreval > 500)
+            else if (dif == 1 && scoreval > 50)
             {
                 dif = 2;
+                trapRange = 2;
+                dmin = 3;
+                dmax = 5;
+            }
+            else if (dif == 2 && scoreval > 100)
+            {
+                dif = 3;
+                trapRange = 3;
+                dmin = 2;
+                dmax = 5;
+            }
+            else if (dif == 3 && scoreval > 250)
+            {
+                dif = 4;
+                trapRange = 4;
+                dmin = 2;
+                dmax = 4;
+            }
+            else if (dif == 4 && scoreval > 500)
+            {
+                dif = 5;
+                dmin = 2;
+                dmax = 3;
+            }
+            else if (dif == 5 && scoreval > 1000)
+            {
+                dif = 6;
+                dmin = 1;
+                dmax = 3;
+            }
+            else if(dif == 6 && scoreval > 2000)
+            {
+                dif = 7;
+                dmin = 1;
+                dmax = 2;
             }
         }
     }
@@ -84,10 +120,16 @@ public class GameScript : MonoBehaviour
         switch (temp)
         {
             case 0: // spike
-                if(pos == 1)
-                    Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11, 2.46f), Quaternion.identity);
-                else
-                    Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11, -2.46f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                int num = Random.Range(1, 5);
+                for(int i = 0; i < num; i++)
+                {
+                    if (pos == 1)
+                        Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11 + i, 2.46f), Quaternion.identity);
+                    else
+                        Instantiate(traps[0], new Vector2((int)PC.transform.position.x + 11 + i, -2.46f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                }
+                if (num > 1)
+                    waitTime += 1;
                 break;
             case 1: // laser
                 if (pos == 1)

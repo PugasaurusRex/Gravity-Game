@@ -262,6 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61563016}
   - component: {fileID: 61563015}
+  - component: {fileID: 61563017}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -279,7 +280,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 03e09034d7a6e554d963a39c6ec5108c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -379,6 +380,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &61563017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61563014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c1039858c176c4c9f79fe259de2626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 03e09034d7a6e554d963a39c6ec5108c, type: 3}
+  - {fileID: 8300000, guid: 4e28cb39e7416b649aa6de006db50034, type: 3}
 --- !u!1 &145119568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,12 +1766,15 @@ MonoBehaviour:
   p1: {fileID: 1475030942}
   p2: {fileID: 2081933217}
   ControlMenu: {fileID: 1376202155}
+  Game: {fileID: 0}
+  GameScore: {fileID: 0}
+  HighScore: {fileID: 0}
   GameStart: 0
+  StartKeyText: {fileID: 0}
   UI: {fileID: 0}
   GameOverScreen: {fileID: 0}
   PauseMenu: {fileID: 0}
   SettingsMenu: {fileID: 0}
-  VictoryScreen: {fileID: 0}
   PreGame: {fileID: 0}
   Sources: []
   volumeSlider: {fileID: 1361086940}
