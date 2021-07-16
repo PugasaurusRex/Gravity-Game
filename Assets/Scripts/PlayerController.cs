@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Controller
-    Rigidbody2D Rig;
+    public Rigidbody2D Rig;
     public Animator Anim;
     SpriteRenderer SR;
 
@@ -56,14 +56,14 @@ public class PlayerController : MonoBehaviour
                 Speaker.clip = JumpSound;
                 Speaker.PlayOneShot(Speaker.clip);
 
-                if (Rig.gravityScale == 1)
+                if (Rig.gravityScale == 2)
                 {
-                    Rig.gravityScale = -1;
+                    Rig.gravityScale = -2;
                     SR.flipY = true;
                 }
                 else
                 {
-                    Rig.gravityScale = 1;
+                    Rig.gravityScale = 2;
                     SR.flipY = false;
                 }
             }
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.timeScale != 0 && MenuScript.GameStart)
         {
-            if((transform.position.y > 0 && Rig.gravityScale == -1) || (transform.position.y < 0 && Rig.gravityScale == 1))
+            if((transform.position.y > 0 && Rig.gravityScale <= 0) || (transform.position.y < 0 && Rig.gravityScale >= 0))
             {
                 Anim.SetBool("Run", true);
                 Anim.SetBool("Jump", false);

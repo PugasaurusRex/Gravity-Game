@@ -21,11 +21,13 @@ public class GameScript : MonoBehaviour
 
     // Traps
     public GameObject[] traps;
-
-    public float dmin = 3; // min seconds between traps
-    public float dmax = 5; // max seconds between traps
-
     bool canTrap = true;
+
+    // Difficulty
+    int trapRange = 4;
+    float dmin = 3; // min seconds between traps
+    float dmax = 5; // max seconds between traps
+    int dif = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,18 @@ public class GameScript : MonoBehaviour
                 float temp = Random.Range(dmin, dmax);
                 StartCoroutine(SpawnTrap(temp));
             }
+
+            if (dif == 0)
+            {
+                dif = 1;
+                trapRange = 4;
+                dmin = 1;
+                dmax = 2;
+            }
+            else if (dif == 1 && scoreval > 500)
+            {
+                dif = 2;
+            }
         }
     }
 
@@ -64,7 +78,7 @@ public class GameScript : MonoBehaviour
 
     IEnumerator SpawnTrap(float waitTime)
     {
-        int temp = Random.Range(0, 2); // Choose a trap
+        int temp = Random.Range(0, trapRange); // Choose a trap
         int pos = Random.Range(0, 2);
 
         switch (temp)
@@ -80,6 +94,18 @@ public class GameScript : MonoBehaviour
                     Instantiate(traps[1], new Vector2((int)PC.transform.position.x + 11, 1.29f), Quaternion.identity);
                 else
                     Instantiate(traps[1], new Vector2((int)PC.transform.position.x + 11, -1.29f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                break;
+            case 2: // box
+                if (pos == 1)
+                    Instantiate(traps[2], new Vector2((int)PC.transform.position.x + 11, 3.49f), Quaternion.identity);
+                else
+                    Instantiate(traps[2], new Vector2((int)PC.transform.position.x + 11, -3.49f), Quaternion.Euler(new Vector3(0, 0, 180)));
+                break;
+            case 3: // mid laser
+                if (pos == 1)
+                    Instantiate(traps[3], new Vector2((int)PC.transform.position.x + 11, 3.37f), Quaternion.identity);
+                else
+                    Instantiate(traps[3], new Vector2((int)PC.transform.position.x + 11, -3.37f), Quaternion.Euler(new Vector3(0, 0, 180)));
                 break;
             default:
                 break;

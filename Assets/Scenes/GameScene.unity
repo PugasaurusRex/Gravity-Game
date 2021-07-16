@@ -327,11 +327,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &35430239
 MonoBehaviour:
@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5b27d5294432c49a17b656d6d5102a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rig: {fileID: 0}
   Anim: {fileID: 0}
   Menu: {fileID: 1574557414}
   Background: {fileID: 631274105}
@@ -1933,8 +1934,8 @@ MonoBehaviour:
   traps:
   - {fileID: 1637304979444192353, guid: faaa909c24f8e9140a8e318da379e5fe, type: 3}
   - {fileID: 8068703293403686679, guid: c919daa0554772d48ba48abbe0a24e50, type: 3}
-  dmin: 1
-  dmax: 2
+  - {fileID: 4898201776402753817, guid: 63ea275ac2eccc04d895e129af38fed7, type: 3}
+  - {fileID: 3024819173295298696, guid: dc636540a9e42334ba5bad283be16cad, type: 3}
 --- !u!61 &381962162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3005,9 +3006,10 @@ GameObject:
   m_Component:
   - component: {fileID: 631274107}
   - component: {fileID: 631274106}
+  - component: {fileID: 631274108}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3074,6 +3076,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &631274108
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631274105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3ebdfe3e7725db48b8ca0687c64fadb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &679076375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6873,7 +6894,7 @@ RectTransform:
   - {fileID: 1866123945}
   - {fileID: 822255557}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9254,7 +9275,7 @@ PrefabInstance:
     - target: {fileID: 3753138249179484312, guid: 3246b8ba2560c1d4bb4367d3b2c3c79f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3753138249179484312, guid: 3246b8ba2560c1d4bb4367d3b2c3c79f,
         type: 3}
